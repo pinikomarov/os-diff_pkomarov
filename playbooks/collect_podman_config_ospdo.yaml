@@ -1,6 +1,7 @@
 ---
 - name: Collect Podman config
   hosts: Controller
+  become: yes
   gather_facts: yes
   vars:
     - collect_podman: true
