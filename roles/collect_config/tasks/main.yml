@@ -19,14 +19,15 @@
   when: collect_ocp
   with_dict: "{{ services }}"
 
-# TODO fails here:
-# - name: Fetch TripleO configs
-#   synchronize:
-#     src: "{{ working_dir }}/{{ tripleo_collect_dir }}"
-#     dest: "{{ local_working_dir }}"
-#     mode: pull
-#     use_ssh_args: yes
-#   when: collect_podman
+
+- name: Fetch TripleO configs
+  ignore_errors: yes
+  synchronize:
+    src: "{{ working_dir }g}/{{ tripleo_collect_dir }}"
+    dest: "{{ local_working_dir }}"
+    mode: pull
+    use_ssh_args: yes
+  when: collect_podman
 
 - name: Fetch CRC configs
   synchronize:
