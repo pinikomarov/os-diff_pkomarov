@@ -1,4 +1,12 @@
 ---
+#creates a local ssh.config with 3 controllers
+- name: creates controller ./ssh.config
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - shell: |
+          grep controller /etc/hosts|grep ctlplane|while read node; do node_name=$(echo $node | cut -f 3 -d " "|cut -f 1 -d".") ; node_ip=$(echo $node | cut -f 1 -d " ");echo -e "Host $node_name\n Hostname $node_ip\n IdentityFile /home/cloud-admin/.ssh/id_rsa\n User cloud-admin\n StrictHostKeyChecking no\n UserKnownHostsFile=/dev/null\n"; done > ssh.config
+
 - name: Collect Podman config
   hosts: Controller
   become: yes
