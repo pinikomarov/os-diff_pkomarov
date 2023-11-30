@@ -19,11 +19,9 @@
   when: collect_ocp
   with_dict: "{{ services }}"
 
-
 - name: Fetch TripleO configs
-  ignore_errors: yes
   synchronize:
-    src: "{{ working_dir }g}/{{ tripleo_collect_dir }}"
+    src: "{{ working_dir }}/{{ tripleo_collect_dir }}"
     dest: "{{ local_working_dir }}"
     mode: pull
     use_ssh_args: yes
